@@ -34,7 +34,8 @@
             border-radius: 16px;
             box-shadow: 0 8px 48px rgba(10,37,64,0.08);
             overflow: hidden;
-            padding-top: 70px;
+            /* Adjusted padding-top to accommodate larger nav */
+            padding-top: 90px; /* Increased from 70px */
         }
         nav {
             background: rgba(255,255,255,0.97);
@@ -45,7 +46,8 @@
             box-shadow: var(--nav-shadow);
             position: fixed;
             top: 0; left: 0; width: 100%;
-            height: 70px;
+            /* Adjusted height for larger logo */
+            height: 90px; /* Increased from 70px */
             z-index: 1000;
             backdrop-filter: blur(4px);
             animation: navFadeIn 1s cubic-bezier(.5,1.4,.5,1) 0.1s;
@@ -69,7 +71,7 @@
             height: 100%; /* Ensure it takes full height of nav */
         }
         .nav-logo img {
-            max-height: 50px; /* Adjust based on desired size */
+            max-height: 70px; /* Increased from 50px */
             width: auto;
             display: block; /* Remove extra space below image */
             transition: transform 0.3s ease;
@@ -357,11 +359,13 @@
             nav .nav-logo { font-size: 1.08em;}
             .nav-links a { padding: 10px 10px;}
             .cert-list .cert-img {height: 44px; width: 44px;}
-            nav { height: 60px; }
-            .container { padding-top: 60px;}
+            /* Adjusted nav height for smaller screens */
+            nav { height: 70px; } /* Increased from 60px */
+            /* Adjusted container padding-top for smaller screens */
+            .container { padding-top: 70px;} /* Increased from 60px */
             .section-title { font-size: 1.1em;}
             .nav-logo img {
-                max-height: 40px; /* Smaller logo for smaller screens */
+                max-height: 55px; /* Smaller logo for smaller screens, increased from 40px */
             }
         }
         @media (max-width: 550px) {
