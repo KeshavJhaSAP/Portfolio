@@ -395,6 +395,17 @@
             document.querySelectorAll('.card').forEach(card => {
                 observer.observe(card);
             });
+
+            // Debugging for logo image loading
+            const logoImg = document.querySelector('.nav-logo img');
+            if (logoImg) {
+                logoImg.addEventListener('error', function() {
+                    console.error('Error loading logo image. Please ensure "Gemini_Generated_Image_w7awzqw7awzqw7aw.jpg" is in the same directory as index.html');
+                });
+                logoImg.addEventListener('load', function() {
+                    console.log('Logo image loaded successfully!');
+                });
+            }
         });
     </script>
 </head>
