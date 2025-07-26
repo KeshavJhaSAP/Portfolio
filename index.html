@@ -63,9 +63,22 @@
             padding: 16px 0;
             letter-spacing: 1px;
             transition: color 0.3s;
+            /* Flexbox for aligning logo image */
+            display: flex;
+            align-items: center;
+            height: 100%; /* Ensure it takes full height of nav */
+        }
+        .nav-logo img {
+            max-height: 50px; /* Adjust based on desired size */
+            width: auto;
+            display: block; /* Remove extra space below image */
+            transition: transform 0.3s ease;
+        }
+        .nav-logo img:hover {
+            transform: scale(1.05);
         }
         .nav-logo:hover {
-            color: var(--accent);
+            color: var(--accent); /* This hover style might not be visible for image */
         }
         .nav-links {
             display: flex;
@@ -347,6 +360,9 @@
             nav { height: 60px; }
             .container { padding-top: 60px;}
             .section-title { font-size: 1.1em;}
+            .nav-logo img {
+                max-height: 40px; /* Smaller logo for smaller screens */
+            }
         }
         @media (max-width: 550px) {
             nav { flex-direction: column; height: auto; padding: 8px 2px;}
@@ -385,7 +401,10 @@
 <body>
     <div class="container">
         <nav>
-            <div class="nav-logo">Keshav Jha</div>
+            <!-- Replaced text with your uploaded logo -->
+            <a href="#home" class="nav-logo">
+                <img src="Gemini_Generated_Image_w7awzqw7awzqw7aw.jpg" alt="SAP FICO Logo">
+            </a>
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
                 <a href="#summary"><i class="fa-solid fa-user-tie"></i> Summary</a>
