@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* --- [Keep all your previous CSS unchanged] --- */
         :root {
             --primary: #0a2540;
             --accent: #ffb300;
@@ -35,7 +34,8 @@
             border-radius: 16px;
             box-shadow: 0 8px 48px rgba(10,37,64,0.08);
             overflow: hidden;
-            padding-top: 90px;
+            /* Adjusted padding-top to accommodate larger nav */
+            padding-top: 90px; /* Increased from 70px */
         }
         nav {
             background: rgba(255,255,255,0.97);
@@ -46,7 +46,8 @@
             box-shadow: var(--nav-shadow);
             position: fixed;
             top: 0; left: 0; width: 100%;
-            height: 90px;
+            /* Adjusted height for larger logo */
+            height: 90px; /* Increased from 70px */
             z-index: 1000;
             backdrop-filter: blur(4px);
             animation: navFadeIn 1s cubic-bezier(.5,1.4,.5,1) 0.1s;
@@ -64,21 +65,22 @@
             padding: 16px 0;
             letter-spacing: 1px;
             transition: color 0.3s;
+            /* Flexbox for aligning logo image */
             display: flex;
             align-items: center;
-            height: 100%;
+            height: 100%; /* Ensure it takes full height of nav */
         }
         .nav-logo img {
-            max-height: 70px;
+            max-height: 70px; /* Increased from 50px */
             width: auto;
-            display: block;
+            display: block; /* Remove extra space below image */
             transition: transform 0.3s ease;
         }
         .nav-logo img:hover {
             transform: scale(1.05);
         }
         .nav-logo:hover {
-            color: var(--accent);
+            color: var(--accent); /* This hover style might not be visible for image */
         }
         .nav-links {
             display: flex;
@@ -286,6 +288,7 @@
         .cert-list a:hover {
             color: var(--accent);
         }
+        /* Contact Section & Form */
         .contact-section {
             background: var(--bg);
             padding: 42px 22px 36px 22px;
@@ -320,6 +323,7 @@
             margin-top: 18px;
             margin-bottom: 12px;
         }
+        /* Remove custom form CSS if desired */
         footer {
             background: var(--gradient);
             text-align: center;
@@ -355,11 +359,13 @@
             nav .nav-logo { font-size: 1.08em;}
             .nav-links a { padding: 10px 10px;}
             .cert-list .cert-img {height: 44px; width: 44px;}
-            nav { height: 70px; }
-            .container { padding-top: 70px;}
+            /* Adjusted nav height for smaller screens */
+            nav { height: 70px; } /* Increased from 60px */
+            /* Adjusted container padding-top for smaller screens */
+            .container { padding-top: 70px;} /* Increased from 60px */
             .section-title { font-size: 1.1em;}
             .nav-logo img {
-                max-height: 55px;
+                max-height: 55px; /* Smaller logo for smaller screens, increased from 40px */
             }
         }
         @media (max-width: 550px) {
@@ -370,6 +376,7 @@
         }
     </style>
     <script>
+        // Navigation tab scroll and active state
         document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.nav-links a').forEach(function(link) {
                 link.addEventListener('click', function(e) {
@@ -409,6 +416,7 @@
 <body>
     <div class="container">
         <nav>
+            <!-- Replaced text with your uploaded logo -->
             <a href="#home" class="nav-logo">
                 <img src="image_7a5d9e.png" alt="SAP FICO Logo">
             </a>
@@ -492,25 +500,6 @@
             <section id="certifications" class="card">
                 <div class="section-title"><i class="fa-solid fa-certificate"></i> Certifications</div>
                 <ul class="cert-list">
-                    <!-- 2025 - Microsoft & LinkedIn -->
-                    <li>
-                        <img class="cert-img" src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Microsoft Logo">
-                        <div>
-                            <strong>Artificial Intelligence and Prompt Engineering</strong><br>
-                            <span style="color: #555;">Microsoft &amp; LinkedIn</span> &mdash; <span>2025</span><br>
-                            <a href="https://www.linkedin.com/learning/certificates/a0578402044458208350ac55497b83348ebe8bf51210b88b3f7d81c7b847c9fc" target="_blank">View Certificate</a>
-                        </div>
-                    </li>
-                    <!-- 2025 - Maruti Suzuki, SVG LOGO -->
-                    <li>
-                        <img class="cert-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Maruti_Suzuki_logo.svg" alt="Maruti Suzuki Logo">
-                        <div>
-                            <strong>Certificate of Facilitation (SAP FI)</strong><br>
-                            <span style="color: #555;">Maruti Suzuki</span> &mdash; <span>2025</span><br>
-                            <a href="https://drive.google.com/file/d/1_py887eX8bqxPjCKHE24n4EN369tZoCG/view" target="_blank">View Certificate</a>
-                        </div>
-                    </li>
-                    <!-- 2024 - Google Cloud Skills Boost -->
                     <li>
                         <img class="cert-img" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo">
                         <div>
@@ -520,7 +509,6 @@
                             <a href="https://www.cloudskillsboost.google/public_profiles/cdbba991-c3e7-45f8-bf9a-b5f740c1b422/badges/8068541" target="_blank">View Credential</a>
                         </div>
                     </li>
-                    <!-- 2023 - LinkedIn Learning -->
                     <li>
                         <img class="cert-img" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Learning Logo">
                         <div>
@@ -529,7 +517,6 @@
                             <a href="https://drive.google.com/file/d/1w1S3tNnHQnP0oBczx3bEQrn2dM3cMRuV/view?usp=drivesdk" target="_blank">View Certificate</a>
                         </div>
                     </li>
-                    <!-- 2022 - Unique ERP -->
                     <li>
                         <img class="cert-img" src="https://www.uniqueerp.in/images/logo.jpg" alt="Unique ERP Logo">
                         <div>
@@ -552,6 +539,7 @@
                     <em>Submissions are stored for my review.</em>
                 </div>
                 <div class="form-group">
+                    <!-- Embedded Google Form as per your link -->
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdvFYPXBRHui7bYefEaMAbEbZ6wnyyqY1B9_tcdhE8MDuqV8w/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
                 </div>
             </section>
