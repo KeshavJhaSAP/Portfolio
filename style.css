@@ -38,19 +38,16 @@ nav li:hover {
   text-shadow: 0 0 10px #fff;
 }
 
+/* Realistic Mountain Background */
 #background-animation {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: 0;
   overflow: hidden;
-}
-
-#mountain-canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  display: block;
+  transition: background-image 0.8s, background 0.8s;
+  background: linear-gradient(rgba(240,248,255,0.7),rgba(240,248,255,0.22));
+  /* JS se image add hogi */
 }
 
 #eagle {
