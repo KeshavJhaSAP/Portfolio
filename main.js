@@ -1,18 +1,18 @@
-// Realistic mountain images for each section
+// Use PNG for mountains and WEBM for eagle animation
 const mountainImages = {
-  home: "assets/mountain1.jpg",
-  summary: "assets/mountain2.jpg",
-  experience: "assets/mountain3.jpg",
-  skillset: "assets/mountain4.jpg",
-  education: "assets/mountain5.jpg",
-  certification: "assets/mountain6.jpg",
-  contact: "assets/mountain7.jpg"
+  home: "assets/mountain1.png",
+  summary: "assets/mountain2.png",
+  experience: "assets/mountain3.png",
+  skillset: "assets/mountain4.png",
+  education: "assets/mountain5.png",
+  certification: "assets/mountain6.png",
+  contact: "assets/mountain7.png"
 };
 
 const sectionsContent = {
   home: `
     <div class="card">
-      <img src="assets/profile.jpg" alt="Profile Photo" />
+      <img src="assets/profile.png" alt="Profile Photo" />
       <div class="section-title">Keshav Jha</div>
       <div class="section-details">
         <b>Web Developer | Cloud Enthusiast | Learner</b><br>
@@ -87,8 +87,7 @@ const sectionsContent = {
 
 function setMountainBackground(section) {
   const bgDiv = document.getElementById('background-animation');
-  // If image not found, fallback to plain color
-  const img = mountainImages[section] || "assets/mountain1.jpg";
+  const img = mountainImages[section] || "assets/mountain1.png";
   bgDiv.style.background = `linear-gradient(rgba(240,248,255,0.7),rgba(240,248,255,0.15)), url('${img}') center/cover no-repeat`;
 }
 
