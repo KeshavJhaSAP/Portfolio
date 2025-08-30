@@ -1,32 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Keshav Jha | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <!-- GSAP for animations -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keshav Jha - SAP FICO Consultant</title>
+    <meta name="description" content="Portfolio of Keshav Jha, SAP FICO Consultant specializing in Financial Systems, SAP MM/SD Integration, and Business Analytics.">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a2540;
+            --accent: #ffb300;
+            --gradient: linear-gradient(90deg, #0a2540 60%, #3b82f6 100%);
+            --bg: #f8fafc;
+            --card: #fff;
+            --text: #232946;
+            --nav-shadow: 0 4px 24px rgba(10,37,64,0.10);
+            --fade-in-distance: 40px;
+            --section-icon: #3b82f6;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+        .container {
+            max-width: 920px;
+            margin: 44px auto 0 auto;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 8px 48px rgba(10,37,64,0.08);
+            overflow: hidden;
+            /* Adjusted padding-top to accommodate larger nav */
+            padding-top: 90px; /* Increased from 70px */
+        }
+        nav {
+            background: rgba(255,255,255,0.97);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 28px;
+            box-shadow: var(--nav-shadow);
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            /* Adjusted height for larger logo */
+            height: 90px; /* Increased from 70px */
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            animation: navFadeIn 1s cubic-bezier(.5,1.4,.5,1) 0.1s;
+        }
+        @keyframes navFadeIn {
+            from { opacity: 0; transform: translateY(-24px);}
+            to   { opacity: 1; transform: translateY(0);}
+        }
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.4em;
+            color: var(--primary);
+            margin-right: auto;
+            padding: 16px 0;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            /* Flexbox for aligning logo image */
+            display: flex;
+            align-items: center;
+            height: 100%; /* Ensure it takes full height of nav */
+        }
+        .nav-logo img {
+            max-height: 70px; /* Increased from 50px */
+            width: auto;
+            display: block; /* Remove extra space below image */
+            transition: transform 0.3s ease;
+        }
+        .nav-logo img:hover {
+            transform: scale(1.05);
+        }
+        .nav-logo:hover {
+            color: var(--accent); /* This hover style might not be visible for image */
+        }
+        .nav-links {
+            display: flex;
+            gap: 22px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 16px 22px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            font-size: 1em;
+        }
+        .nav-links a::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(.5,1.4,.5,1);
+        }
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+        .nav-links a.active, .nav-links a:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(255,179,0,0.11);
+        }
+        header {
+            background: var(--gradient);
+            color: #fff;
+            text-align: center;
+            padding: 70px 34px 46px 34px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s cubic-bezier(.5,1.4,.5,1);
+        }
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            font-size: 3em;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        header p {
+            margin: 18px 0 0 0;
+            font-size: 1.24em;
+            opacity: 0.97;
+            font-weight: 600;
+        }
+        .header-sub {
+            font-size: 1.07em;
+            color: #ffe7b8;
+            margin-top: 9px;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.5s cubic-bezier(.5,1.4,.5,1) 0.3s;
+        }
+        .resume-btn {
+            display: inline-block;
+            margin-top: 23px;
+            background: var(--accent);
+            color: #232946;
+            font-size: 1.14em;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 16px 38px 16px 31px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(255,179,0,0.15);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            will-change: transform;
+        }
+        .resume-btn i {
+            margin-right: 10px;
+        }
+        .resume-btn:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: -70%; top: 0;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(90deg, #fff2b8 0%, #ffb300 100%);
+            opacity: 0.26;
+            transform: skewX(-24deg);
+            transition: left 0.4s cubic-bezier(.6,1.4,.7,1);
+            pointer-events: none;
+        }
+        .resume-btn:hover {
+            background: #fff;
+            color: var(--primary);
+            transform: scale(1.06);
+        }
+        .resume-btn:hover:after {
+            left: 0;
+        }
+        main {
+            padding: 44px 34px;
+        }
+        section {
+            margin-bottom: 44px;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.55em;
+            color: var(--primary);
+            border-bottom: 2.5px solid var(--accent);
+            padding-bottom: 9px;
+            margin-bottom: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .section-title i {
+            color: var(--section-icon);
+            font-size: 1.2em;
+        }
+        .card {
+            background: var(--bg);
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(10,37,64,0.07);
+            padding: 30px 26px 26px 26px;
+            opacity: 0;
+            transform: translateY(var(--fade-in-distance));
+            transition: opacity 0.8s cubic-bezier(.5,1.4,.5,1), transform 0.8s cubic-bezier(.5,1.4,.5,1);
+            will-change: opacity, transform;
+        }
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .skills-list li {
+            background-color: #eaf4ff;
+            color: var(--primary);
+            padding: 12px 22px;
+            border-radius: 22px;
+            font-size: 1em;
+            font-weight: 600;
+            box-shadow: 0 1px 4px rgba(10,37,64,0.05);
+            transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+        }
+        .skills-list li:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 3px 16px rgba(255,179,0,0.17);
+        }
+        .cert-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+        .cert-list li {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: #fff;
+            border-radius: 11px;
+            box-shadow: 0 2px 12px rgba(10,37,64,0.10);
+            padding: 14px 15px;
+            transition: box-shadow 0.3s;
+        }
+        .cert-list li:hover {
+            box-shadow: 0 8px 32px rgba(10,37,64,0.15);
+        }
+        .cert-list .cert-img {
+            height: 60px;
+            width: 60px;
+            margin-right: 0px;
+            border-radius: 13px;
+            object-fit: contain;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 2px 8px rgba(10,37,64,0.11);
+        }
+        .cert-list strong {
+            font-size: 1.1em;
+        }
+        .cert-list a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .cert-list a:hover {
+            color: var(--accent);
+        }
+        /* Contact Section & Form */
+        .contact-section {
+            background: var(--bg);
+            padding: 42px 22px 36px 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(10,37,64,0.09);
+        }
+        .contact-buttons {
+            margin-bottom: 28px;
+        }
+        .contact-buttons a {
+            text-decoration: none;
+            color: #fff;
+            background-color: var(--primary);
+            padding: 16px 30px;
+            margin: 8px 14px 8px 0;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 2px 8px rgba(10,37,64,0.13);
+            font-size: 1.07em;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            will-change: transform;
+        }
+        .contact-buttons a:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+            transform: scale(1.09);
+        }
+        .db-info {
+            font-size: 1em;
+            color: #586e8a;
+            margin-top: 18px;
+            margin-bottom: 12px;
+        }
+        /* Remove custom form CSS if desired */
+        footer {
+            background: var(--gradient);
+            text-align: center;
+            padding: 38px 10px 22px 10px;
+            font-size: 1.08em;
+            color: #fff;
+            border-top: none;
+            animation: fadeInUp 1.7s cubic-bezier(.5,1.4,.5,1);
+            margin-top: 48px;
+            position: relative;
+        }
+        .footer-social {
+            margin-bottom: 10px;
+        }
+        .footer-social a {
+            color: #fff;
+            margin: 0 12px;
+            font-size: 1.35em;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .footer-social a:hover {
+            color: var(--accent);
+            transform: scale(1.13);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(var(--fade-in-distance)); }
+            to   { opacity: 1; transform: translateY(0);}
+        }
+        @media (max-width: 800px) {
+            .container, main { padding: 10px; }
+            header { padding: 36px 8px 18px 8px; }
+            .contact-section, .card { padding: 15px 4px 15px 4px;}
+            nav .nav-logo { font-size: 1.08em;}
+            .nav-links a { padding: 10px 10px;}
+            .cert-list .cert-img {height: 44px; width: 44px;}
+            /* Adjusted nav height for smaller screens */
+            nav { height: 70px; } /* Increased from 60px */
+            /* Adjusted container padding-top for smaller screens */
+            .container { padding-top: 70px;} /* Increased from 60px */
+            .section-title { font-size: 1.1em;}
+            .nav-logo img {
+                max-height: 55px; /* Smaller logo for smaller screens, increased from 40px */
+            }
+        }
+        @media (max-width: 550px) {
+            nav { flex-direction: column; height: auto; padding: 8px 2px;}
+            .nav-links { flex-wrap: wrap; gap: 6px; }
+            .nav-logo { padding: 10px 0;}
+            .container { padding-top: 98px;}
+        }
+    </style>
+    <script>
+        // Navigation tab scroll and active state
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    const section = document.querySelector(this.getAttribute('href'));
+                    if (section) section.scrollIntoView({behavior:'smooth'});
+                });
+            });
+
+            // Card fade-in on scroll
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.card').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Debugging for logo image loading
+            const logoImg = document.querySelector('.nav-logo img');
+            if (logoImg) {
+                logoImg.addEventListener('error', function() {
+                    console.error('Error loading logo image. Please ensure "image_7a5d9e.png" is in the same directory as index.html');
+                });
+                logoImg.addEventListener('load', function() {
+                    console.log('Logo image loaded successfully!');
+                });
+            }
+        });
+    </script>
 </head>
 <body>
-  <nav>
-    <ul>
-      <li data-section="home" class="active">Home</li>
-      <li data-section="summary">Summary</li>
-      <li data-section="experience">Experience</li>
-      <li data-section="skillset">Skillset</li>
-      <li data-section="education">Education</li>
-      <li data-section="certification">Certification</li>
-      <li data-section="contact">Contact</li>
-    </ul>
-  </nav>
-  <div id="background-animation">
-    <!-- Mountain image background set by JS -->
-    <video id="eagle" src="assets/eagle.gif.webm" alt="Flying Eagle" autoplay loop muted playsinline></video>
-  </div>
-  <main id="content">
-    <!-- Section content will be loaded here -->
-  </main>
-  <script src="main.js"></script>
+    <div class="container">
+        <nav>
+            <!-- Replaced text with your uploaded logo -->
+            <a href="#home" class="nav-logo">
+                <img src="image_7a5d9e.png" alt="SAP FICO Logo">
+            </a>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#summary"><i class="fa-solid fa-user-tie"></i> Summary</a>
+                <a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
+                <a href="#skills"><i class="fa-solid fa-brain"></i> Skillset</a>
+                <a href="#education"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+                <a href="#certifications"><i class="fa-solid fa-certificate"></i> Certifications</a>
+                <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+            </div>
+        </nav>
+        <header id="home">
+            <h1>Keshav Jha</h1>
+            <p>SAP FICO Consultant | MBA (Finance & Analytics)</p>
+            <div class="header-sub">Empowering Financial Transformation & Process Excellence</div>
+            <a class="resume-btn" href="resume.pdf" download><i class="fa-solid fa-download"></i> Download Resume (PDF)</a>
+        </header>
+        <main>
+            <section id="summary" class="card">
+                <div class="section-title"><i class="fa-solid fa-user-tie"></i> Professional Summary</div>
+                <p>
+                    Results-driven <b>SAP FICO Consultant</b> with proven expertise in streamlining financial operations and enhancing business processes. Adept at full-cycle SAP FICO implementations, configuration, and integration with MM & SD modules. Recognized for delivering actionable solutions that optimize workflows, improve reporting accuracy, and drive organizational growth. Committed to empowering clients with insightful analytics and sustainable financial practices.
+                </p>
+            </section>
+            <section id="experience" class="card">
+                <div class="section-title"><i class="fa-solid fa-briefcase"></i> Professional Experience</div>
+                <div class="job">
+                    <h3>SAP FICO Consultant</h3>
+                    <p class="meta">Techlab_Systems &mdash; April 2024 – March 2025</p>
+                    <p>
+                        Led SAP FICO configuration and end-to-end implementations; provided expert support to end users and project teams. Conducted system testing and facilitated seamless integration with SAP MM & SD modules. Delivered business process improvements, ensuring compliance and optimal performance across financial domains.
+                    </p>
+                </div>
+                <div class="job">
+                    <h3>Account Executive</h3>
+                    <p class="meta">VPDG & Associates &mdash; January 2021 – January 2023</p>
+                    <p>
+                        Oversaw financial data integrity and documentation management for multiple departments. Utilized SAP FICO, Tally, and advanced Excel for accurate reporting and analysis. Collaborated with cross-functional teams to support audit and compliance initiatives.
+                    </p>
+                </div>
+                <div class="job">
+                    <h3>SAP Finance Control Consultant</h3>
+                    <p class="meta">VSD Technologies Pvt. Ltd. &mdash; September 2022 – December 2022</p>
+                    <p>
+                        Specialized in configuring SAP Financial Accounting (FI) and Controlling (CO) modules, including Accounts Payable, Accounts Receivable, and Asset Accounting. Drove process automation and system enhancements to support business objectives.
+                    </p>
+                </div>
+            </section>
+            <section id="skills" class="card">
+                <div class="section-title"><i class="fa-solid fa-brain"></i> Core Competencies</div>
+                <ul class="skills-list">
+                    <li>SAP FICO Configuration & Implementation</li>
+                    <li>Financial Accounting (FI)</li>
+                    <li>Controlling (CO)</li>
+                    <li>Accounts Payable (AP)</li>
+                    <li>Accounts Receivable (AR)</li>
+                    <li>SAP Fiori</li>
+                    <li>MM & SD Integration</li>
+                    <li>Process Optimization</li>
+                    <li>Financial Reporting & Analytics</li>
+                    <li>Time & Resource Management</li>
+                </ul>
+            </section>
+            <section id="education" class="card">
+                <div class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education</div>
+                <div class="education-item">
+                    <h3 class="certification"><i class="fa-solid fa-certificate"></i> US CMA (Certified Management Accountant) <span style="font-weight:400;">– Pursuing</span></h3>
+                    <p class="meta">Institute of Management Accountants (IMA), USA &mdash; Since 2024</p>
+                </div>
+                <div class="education-item">
+                    <h3>Master of Business Administration (MBA), Finance & Analytics</h3>
+                    <p class="meta">Maharshi Dayanand University &mdash; 2023 – 2025</p>
+                </div>
+                <div class="education-item">
+                    <h3>Bachelor of Commerce (BCom)</h3>
+                    <p class="meta">Delhi University &mdash; 2019 – 2022</p>
+                </div>
+            </section>
+            <section id="certifications" class="card">
+                <div class="section-title"><i class="fa-solid fa-certificate"></i> Certifications</div>
+                <ul class="cert-list">
+                    <li>
+                        <img class="cert-img" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo">
+                        <div>
+                            <strong>Introduction to Generative AI</strong><br>
+                            <span style="color: #555;">Google Cloud Skills Boost</span> &mdash; <span>February 2024</span><br>
+                            Credential ID: 8068541<br>
+                            <a href="https://www.cloudskillsboost.google/public_profiles/cdbba991-c3e7-45f8-bf9a-b5f740c1b422/badges/8068541" target="_blank">View Credential</a>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="cert-img" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Learning Logo">
+                        <div>
+                            <strong>SAP Financials Essential Training</strong><br>
+                            <span style="color: #555;">LinkedIn Learning</span> &mdash; <span>January 2023</span><br>
+                            <a href="https://drive.google.com/file/d/1w1S3tNnHQnP0oBczx3bEQrn2dM3cMRuV/view?usp=drivesdk" target="_blank">View Certificate</a>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="cert-img" src="https://www.uniqueerp.in/images/logo.jpg" alt="Unique ERP Logo">
+                        <div>
+                            <strong>SAP FICO Consultant Trainee</strong><br>
+                            <span style="color: #555;">Unique ERP</span> &mdash; <span>September 2022</span><br>
+                            <a href="https://drive.google.com/file/d/12so7ncIZLzocy7Ud2kC0Hw_v0hZ5FM_V/view?usp=drivesdk" target="_blank">View Certificate</a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section id="contact" class="contact-section card">
+                <div class="section-title"><i class="fa-solid fa-envelope"></i> Contact Me</div>
+                <div class="contact-buttons">
+                    <a href="mailto:keshavjhans@gmail.com" title="Email Keshav Jha"><i class="fa-solid fa-envelope"></i> Email</a>
+                    <a href="https://www.linkedin.com/in/keshavjha3311" target="_blank" title="Connect on LinkedIn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    <a href="tel:+919311892781" title="Call Keshav Jha"><i class="fa-solid fa-phone"></i> Call Me (+91)</a>
+                </div>
+                <div class="db-info">
+                    <strong>Want to connect?</strong> Fill out the form below. Your details will be stored securely so I can reach out to you.<br>
+                    <em>Submissions are stored for my review.</em>
+                </div>
+                <div class="form-group">
+                    <!-- Embedded Google Form as per your link -->
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdvFYPXBRHui7bYefEaMAbEbZ6wnyyqY1B9_tcdhE8MDuqV8w/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-social">
+                <a href="mailto:keshavjhans@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/keshavjha3311" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="tel:+919311892781" title="Call"><i class="fa-solid fa-phone"></i></a>
+            </div>
+            © 2025 Keshav Jha. All rights reserved.
+        </footer>
+    </div>
 </body>
 </html>
