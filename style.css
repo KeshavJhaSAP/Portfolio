@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #f4f9fb;
+  color: #222;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(36, 54, 87, 0.8);
+  z-index: 10;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 1.2rem 0;
+}
+
+nav li {
+  margin: 0 2rem;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+nav li.active,
+nav li:hover {
+  color: #3cc6f6;
+  font-weight: bold;
+  text-shadow: 0 0 10px #fff;
+}
+
+#background-animation {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#mountain-canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: block;
+}
+
+#eagle {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  left: -200px;
+  top: 40vh;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.7s;
+  opacity: 1;
+}
+
+main#content {
+  position: relative;
+  z-index: 1;
+  margin: 7rem auto 2rem auto;
+  max-width: 720px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 2.5rem;
+  box-shadow: 0 12px 32px rgba(36,54,87,0.18);
+  padding: 2.5rem 2rem;
+  min-height: 400px;
+  transition: background 0.5s;
+}
+
+.card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 24px rgba(36,54,87,0.12);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s cubic-bezier(.39,.58,.57,1) forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.card img {
+  max-width: 140px;
+  float: right;
+  margin-left: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px #cbe7ff70;
+}
+
+.section-title {
+  font-size: 2.1rem;
+  color: #244575;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 12px #dde7f7;
+}
+
+.section-details {
+  font-size: 1.15rem;
+  color: #234;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.contact-links a {
+  margin-right: 1.5rem;
+  color: #3cc6f6;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.contact-links a:hover {
+  color: #244575;
+  text-decoration: underline;
+}
