@@ -8,6 +8,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
     <style>
         html, body {
             scroll-behavior: smooth;
@@ -23,12 +26,13 @@
             --fade-in-distance: 40px;
             --section-icon: #3b82f6;
         }
-        html, body {
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Open Sans', 'Segoe UI', Arial, sans-serif;
             background: var(--bg);
             color: var(--text);
+            overflow-x: hidden;
         }
         .container {
             max-width: 920px;
@@ -51,11 +55,6 @@
             height: 90px;
             z-index: 1000;
             backdrop-filter: blur(4px);
-            animation: navFadeIn 1s cubic-bezier(.5,1.4,.5,1) 0.1s;
-        }
-        @keyframes navFadeIn {
-            from { opacity: 0; transform: translateY(-24px);}
-            to   { opacity: 1; transform: translateY(0);}
         }
         .nav-logo {
             font-family: 'Montserrat', sans-serif;
@@ -97,6 +96,10 @@
             transition: background 0.2s, color 0.2s, box-shadow 0.2s;
             font-size: 1em;
         }
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
         .nav-links a::after {
             content: '';
             display: block;
@@ -108,24 +111,10 @@
             transform: scaleX(0);
             transition: transform 0.3s cubic-bezier(.5,1.4,.5,1);
         }
-        .nav-links a.active::after,
-        .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
         .nav-links a.active, .nav-links a:hover {
             background: var(--accent);
             color: #fff;
             box-shadow: 0 2px 12px rgba(255,179,0,0.11);
-        }
-        .nav-links a:active {
-            animation: navBounce 0.8s cubic-bezier(.5,1.4,.5,1);
-        }
-        @keyframes navBounce {
-            0% { transform: scale(1);}
-            25% { transform: scale(1.12);}
-            40% { transform: scale(0.98);}
-            60% { transform: scale(1.05);}
-            100% { transform: scale(1);}
         }
         header {
             background: var(--gradient);
@@ -134,7 +123,6 @@
             padding: 70px 34px 46px 34px;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 1s cubic-bezier(.5,1.4,.5,1);
         }
         header h1 {
             font-family: 'Montserrat', sans-serif;
@@ -154,7 +142,6 @@
             color: #ffe7b8;
             margin-top: 9px;
             letter-spacing: 1px;
-            animation: fadeInUp 1.5s cubic-bezier(.5,1.4,.5,1) 0.3s;
         }
         .resume-btn {
             display: inline-block;
@@ -171,7 +158,6 @@
             overflow: hidden;
             transition: background 0.3s, color 0.3s, transform 0.2s;
             will-change: transform;
-            animation: btnPop 1.2s cubic-bezier(.5,1.4,.5,1) 0.4s;
         }
         .resume-btn i {
             margin-right: 10px;
@@ -189,21 +175,10 @@
             transition: left 0.4s cubic-bezier(.6,1.4,.7,1);
             pointer-events: none;
         }
-        .resume-btn:hover, .contact-buttons a:hover {
+        .resume-btn:hover {
             background: #fff;
             color: var(--primary);
             transform: scale(1.06);
-            animation: btnPulse 0.6s;
-        }
-        @keyframes btnPulse {
-            0% { box-shadow: 0 2px 12px rgba(255,179,0,0.15);}
-            50% { box-shadow: 0 6px 24px rgba(255,179,0,0.25);}
-            100% { box-shadow: 0 2px 12px rgba(255,179,0,0.15);}
-        }
-        @keyframes btnPop {
-            0% { opacity: 0; transform: scale(0.8);}
-            80% { opacity: 1; transform: scale(1.07);}
-            100% { opacity: 1; transform: scale(1);}
         }
         .resume-btn:hover:after {
             left: 0;
@@ -238,17 +213,6 @@
             padding: 30px 26px 26px 26px;
             opacity: 0;
             transform: translateY(var(--fade-in-distance));
-            transition: opacity 0.8s cubic-bezier(.5,1.4,.5,1), transform 0.8s cubic-bezier(.5,1.4,.5,1);
-            will-change: opacity, transform;
-        }
-        .fade-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            animation: cardFadeIn 0.7s cubic-bezier(.5,1.4,.5,1);
-        }
-        @keyframes cardFadeIn {
-            from { opacity: 0; transform: translateY(40px);}
-            to   { opacity: 1; transform: translateY(0);}
         }
         .skills-list {
             list-style: none;
@@ -266,19 +230,13 @@
             font-weight: 600;
             box-shadow: 0 1px 4px rgba(10,37,64,0.05);
             transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+            cursor: pointer;
         }
         .skills-list li:hover {
             background: var(--accent);
             color: #fff;
             box-shadow: 0 3px 16px rgba(255,179,0,0.17);
-            animation: skillBounce 0.7s;
-        }
-        @keyframes skillBounce {
-            0% { transform: scale(1);}
-            30% { transform: scale(1.15);}
-            50% { transform: scale(0.95);}
-            70% { transform: scale(1.08);}
-            100% { transform: scale(1);}
+            transform: scale(1.07);
         }
         .cert-list {
             list-style: none;
@@ -297,15 +255,11 @@
             box-shadow: 0 2px 12px rgba(10,37,64,0.10);
             padding: 14px 15px;
             transition: box-shadow 0.3s;
+            cursor: pointer;
         }
         .cert-list li:hover {
             box-shadow: 0 8px 32px rgba(10,37,64,0.15);
-            animation: certFade 0.6s;
-        }
-        @keyframes certFade {
-            0% { box-shadow: 0 2px 12px rgba(10,37,64,0.10);}
-            80% { box-shadow: 0 14px 40px rgba(10,37,64,0.18);}
-            100% { box-shadow: 0 8px 32px rgba(10,37,64,0.15);}
+            transform: scale(1.03);
         }
         .cert-list .cert-img {
             height: 60px;
@@ -356,7 +310,6 @@
             background-color: var(--accent);
             color: var(--primary);
             transform: scale(1.09);
-            animation: btnPulse 0.6s;
         }
         .db-info {
             font-size: 1em;
@@ -371,7 +324,6 @@
             font-size: 1.08em;
             color: #fff;
             border-top: none;
-            animation: fadeInUp 1.7s cubic-bezier(.5,1.4,.5,1);
             margin-top: 48px;
             position: relative;
         }
@@ -407,12 +359,10 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.4s, transform 0.4s;
-            animation: none;
         }
         #back-to-top.show {
             opacity: 1;
             pointer-events: auto;
-            animation: backTopPop 0.7s;
             transform: scale(1.08);
         }
         #back-to-top:hover {
@@ -420,15 +370,6 @@
             color: #fff;
             transform: scale(1.18);
             box-shadow: 0 10px 36px rgba(10,37,64,0.18);
-        }
-        @keyframes backTopPop {
-            0% { opacity: 0; transform: scale(0.6);}
-            80% { opacity: 1; transform: scale(1.10);}
-            100% { opacity: 1; transform: scale(1.08);}
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(var(--fade-in-distance)); }
-            to   { opacity: 1; transform: translateY(0);}
         }
         @media (max-width: 800px) {
             .container, main { padding: 10px; }
@@ -452,70 +393,6 @@
             .container { padding-top: 98px;}
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Nav highlight and animate scroll
-            document.querySelectorAll('.nav-links a').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                    // Animate bounce
-                    this.classList.add('animated-click');
-                    setTimeout(() => this.classList.remove('animated-click'), 500);
-
-                    const section = document.querySelector(this.getAttribute('href'));
-                    if (section) {
-                        section.scrollIntoView({behavior:'smooth'});
-                    }
-                });
-            });
-
-            // Card fade-in on scroll
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                        // Only animate once
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.14 });
-            document.querySelectorAll('.card').forEach(card => {
-                observer.observe(card);
-            });
-
-            // Debugging for logo image loading
-            const logoImg = document.querySelector('.nav-logo img');
-            if (logoImg) {
-                logoImg.addEventListener('error', function() {
-                    console.error('Error loading logo image. Please ensure "image_7a5d9e.png" is in the same directory as index.html');
-                });
-                logoImg.addEventListener('load', function() {
-                    console.log('Logo image loaded successfully!');
-                });
-            }
-
-            // Back to Top Button
-            const backTopBtn = document.createElement('button');
-            backTopBtn.id = 'back-to-top';
-            backTopBtn.title = 'Scroll to top';
-            backTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-            document.body.appendChild(backTopBtn);
-
-            backTopBtn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 380) {
-                    backTopBtn.classList.add('show');
-                } else {
-                    backTopBtn.classList.remove('show');
-                }
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -692,7 +569,139 @@
             © 2025 Keshav Jha. All rights reserved.
         </footer>
     </div>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
     <!-- LinkedIn Profile Badge Script -->
     <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+    <!-- GSAP Animations -->
+    <script>
+    function runGSAPAnimations() {
+        // Animate header elements
+        gsap.from("header h1", {y: -40, opacity: 0, duration: 0.9, ease: "power2.out"});
+        gsap.from("header p", {y: -18, opacity: 0, duration: 0.8, delay: 0.2, ease: "power2.out"});
+        gsap.from(".header-sub", {y: 20, opacity: 0, duration: 0.8, delay: 0.4, ease: "power2.out"});
+        gsap.from(".resume-btn", {scale: 0.85, opacity: 0, duration: 0.8, delay: 0.6, ease: "elastic.out(1,0.65)"});
+        // Animate nav links
+        gsap.from(".nav-links a", {
+            opacity: 0,
+            y: -25,
+            stagger: 0.07,
+            duration: 0.65,
+            delay: 0.15,
+            ease: "power2.out"
+        });
+        // Animate cards on load
+        gsap.from(".card", {
+            opacity: 0,
+            y: 60,
+            stagger: 0.22,
+            duration: 1,
+            delay: 0.6,
+            ease: "power3.out"
+        });
+        // Animate footer
+        gsap.from("footer", {
+            opacity: 0,
+            y: 40,
+            duration: 0.8,
+            delay: 1.5,
+            ease: "power2.out"
+        });
+    }
+
+    // Animate cards and sections on scroll
+    function animateOnScroll() {
+        gsap.utils.toArray(".card").forEach(card => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+        gsap.utils.toArray(".section-title").forEach(title => {
+            gsap.from(title, {
+                scrollTrigger: {
+                    trigger: title,
+                    start: "top 95%",
+                    toggleActions: "play none none reverse",
+                },
+                opacity: 0,
+                y: 32,
+                duration: 0.7,
+                ease: "power2.out"
+            });
+        });
+    }
+
+    // Animate skill/cert buttons on hover
+    document.addEventListener("DOMContentLoaded", function() {
+        // Animate on page load and tab restore/minimize
+        runGSAPAnimations();
+        animateOnScroll();
+
+        document.addEventListener("visibilitychange", function() {
+            if (!document.hidden) {
+                runGSAPAnimations();
+                animateOnScroll();
+            }
+        });
+
+        // Nav click smooth scroll and bounce
+        document.querySelectorAll('.nav-links a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                gsap.to(this, {scale: 1.15, duration: 0.2, yoyo: true, repeat: 1});
+                const section = document.querySelector(this.getAttribute('href'));
+                if (section) {
+                    gsap.to(window, {duration: 1, scrollTo: section.offsetTop - 60, ease: "power2.inOut"});
+                }
+            });
+        });
+
+        // Back to Top button
+        const backTopBtn = document.getElementById('back-to-top');
+        backTopBtn.addEventListener('click', function() {
+            gsap.to(window, {duration: 1, scrollTo: 0, ease: "power2.inOut"});
+        });
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 380) {
+                backTopBtn.classList.add('show');
+            } else {
+                backTopBtn.classList.remove('show');
+            }
+        });
+
+        // Skill/cert hover pop
+        document.querySelectorAll('.skills-list li, .cert-list li').forEach(function(el) {
+            el.addEventListener('mouseenter', function() {
+                gsap.to(el, {scale: 1.11, duration: 0.25, ease: "elastic.out(1,0.7)"});
+            });
+            el.addEventListener('mouseleave', function() {
+                gsap.to(el, {scale: 1, duration: 0.2, ease: "power2.out"});
+            });
+        });
+
+        // Resume and contact button pulse
+        document.querySelectorAll('.resume-btn, .contact-buttons a').forEach(function(btn) {
+            btn.addEventListener('mouseenter', function() {
+                gsap.to(btn, {scale: 1.09, duration: 0.20, ease: "elastic.out(1,0.8)"});
+            });
+            btn.addEventListener('mouseleave', function() {
+                gsap.to(btn, {scale: 1, duration: 0.18, ease: "power2.out"});
+            });
+        });
+    });
+    </script>
+    <!-- GSAP ScrollToPlugin CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollToPlugin.min.js"></script>
 </body>
 </html>
