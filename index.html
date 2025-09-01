@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        html, body {
+            scroll-behavior: smooth;
+        }
         :root {
             --primary: #0a2540;
             --accent: #ffb300;
@@ -114,6 +117,16 @@
             color: #fff;
             box-shadow: 0 2px 12px rgba(255,179,0,0.11);
         }
+        .nav-links a:active {
+            animation: navBounce 0.8s cubic-bezier(.5,1.4,.5,1);
+        }
+        @keyframes navBounce {
+            0% { transform: scale(1);}
+            25% { transform: scale(1.12);}
+            40% { transform: scale(0.98);}
+            60% { transform: scale(1.05);}
+            100% { transform: scale(1);}
+        }
         header {
             background: var(--gradient);
             color: #fff;
@@ -158,6 +171,7 @@
             overflow: hidden;
             transition: background 0.3s, color 0.3s, transform 0.2s;
             will-change: transform;
+            animation: btnPop 1.2s cubic-bezier(.5,1.4,.5,1) 0.4s;
         }
         .resume-btn i {
             margin-right: 10px;
@@ -175,10 +189,21 @@
             transition: left 0.4s cubic-bezier(.6,1.4,.7,1);
             pointer-events: none;
         }
-        .resume-btn:hover {
+        .resume-btn:hover, .contact-buttons a:hover {
             background: #fff;
             color: var(--primary);
             transform: scale(1.06);
+            animation: btnPulse 0.6s;
+        }
+        @keyframes btnPulse {
+            0% { box-shadow: 0 2px 12px rgba(255,179,0,0.15);}
+            50% { box-shadow: 0 6px 24px rgba(255,179,0,0.25);}
+            100% { box-shadow: 0 2px 12px rgba(255,179,0,0.15);}
+        }
+        @keyframes btnPop {
+            0% { opacity: 0; transform: scale(0.8);}
+            80% { opacity: 1; transform: scale(1.07);}
+            100% { opacity: 1; transform: scale(1);}
         }
         .resume-btn:hover:after {
             left: 0;
@@ -219,6 +244,11 @@
         .fade-in {
             opacity: 1 !important;
             transform: translateY(0) !important;
+            animation: cardFadeIn 0.7s cubic-bezier(.5,1.4,.5,1);
+        }
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to   { opacity: 1; transform: translateY(0);}
         }
         .skills-list {
             list-style: none;
@@ -241,6 +271,14 @@
             background: var(--accent);
             color: #fff;
             box-shadow: 0 3px 16px rgba(255,179,0,0.17);
+            animation: skillBounce 0.7s;
+        }
+        @keyframes skillBounce {
+            0% { transform: scale(1);}
+            30% { transform: scale(1.15);}
+            50% { transform: scale(0.95);}
+            70% { transform: scale(1.08);}
+            100% { transform: scale(1);}
         }
         .cert-list {
             list-style: none;
@@ -262,6 +300,12 @@
         }
         .cert-list li:hover {
             box-shadow: 0 8px 32px rgba(10,37,64,0.15);
+            animation: certFade 0.6s;
+        }
+        @keyframes certFade {
+            0% { box-shadow: 0 2px 12px rgba(10,37,64,0.10);}
+            80% { box-shadow: 0 14px 40px rgba(10,37,64,0.18);}
+            100% { box-shadow: 0 8px 32px rgba(10,37,64,0.15);}
         }
         .cert-list .cert-img {
             height: 60px;
@@ -312,6 +356,7 @@
             background-color: var(--accent);
             color: var(--primary);
             transform: scale(1.09);
+            animation: btnPulse 0.6s;
         }
         .db-info {
             font-size: 1em;
@@ -343,6 +388,44 @@
             color: var(--accent);
             transform: scale(1.13);
         }
+        /* Back to top button */
+        #back-to-top {
+            position: fixed;
+            right: 30px;
+            bottom: 32px;
+            z-index: 9999;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            outline: none;
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            font-size: 2em;
+            box-shadow: 0 6px 24px rgba(255,179,0,0.16);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s, transform 0.4s;
+            animation: none;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            animation: backTopPop 0.7s;
+            transform: scale(1.08);
+        }
+        #back-to-top:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.18);
+            box-shadow: 0 10px 36px rgba(10,37,64,0.18);
+        }
+        @keyframes backTopPop {
+            0% { opacity: 0; transform: scale(0.6);}
+            80% { opacity: 1; transform: scale(1.10);}
+            100% { opacity: 1; transform: scale(1.08);}
+        }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(var(--fade-in-distance)); }
             to   { opacity: 1; transform: translateY(0);}
@@ -360,6 +443,7 @@
             .nav-logo img {
                 max-height: 55px;
             }
+            #back-to-top { right: 13px; bottom: 18px; width: 40px; height: 40px; font-size: 1.3em;}
         }
         @media (max-width: 550px) {
             nav { flex-direction: column; height: auto; padding: 8px 2px;}
@@ -370,13 +454,20 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Nav highlight and animate scroll
             document.querySelectorAll('.nav-links a').forEach(function(link) {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
+                    // Animate bounce
+                    this.classList.add('animated-click');
+                    setTimeout(() => this.classList.remove('animated-click'), 500);
+
                     const section = document.querySelector(this.getAttribute('href'));
-                    if (section) section.scrollIntoView({behavior:'smooth'});
+                    if (section) {
+                        section.scrollIntoView({behavior:'smooth'});
+                    }
                 });
             });
 
@@ -385,9 +476,11 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('fade-in');
+                        // Only animate once
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12 });
+            }, { threshold: 0.14 });
             document.querySelectorAll('.card').forEach(card => {
                 observer.observe(card);
             });
@@ -402,6 +495,25 @@
                     console.log('Logo image loaded successfully!');
                 });
             }
+
+            // Back to Top Button
+            const backTopBtn = document.createElement('button');
+            backTopBtn.id = 'back-to-top';
+            backTopBtn.title = 'Scroll to top';
+            backTopBtn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
+            document.body.appendChild(backTopBtn);
+
+            backTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 380) {
+                    backTopBtn.classList.add('show');
+                } else {
+                    backTopBtn.classList.remove('show');
+                }
+            });
         });
     </script>
 </head>
